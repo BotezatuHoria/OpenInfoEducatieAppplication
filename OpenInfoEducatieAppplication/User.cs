@@ -30,6 +30,12 @@ namespace OpenInfoEducatieAppplication
             this._password = _password;
         }
 
+        public int id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
         public string email
         {
             get { return _email; }
@@ -53,6 +59,8 @@ namespace OpenInfoEducatieAppplication
             get { return _password; }
             set { _password = value; }
         }
+
+        
 
     }
 }

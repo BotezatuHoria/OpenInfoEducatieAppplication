@@ -53,9 +53,16 @@ namespace OpenInfoEducatieAppplication
                 result = streamReader.ReadToEnd();
             }
 
-            var final = JsonConvert.DeserializeObject(result); 
-            Console.WriteLine(final);
+            Console.WriteLine(result);
+
+            UserRequest fin = JsonConvert.DeserializeObject<UserRequest>(result);
+            //var final = JsonConvert.DeserializeObject(result); 
+            Console.WriteLine(fin.Status);
             Console.WriteLine(res.StatusCode);
+
+            
+
+            //new Interface().ShowDialog();
 
         }
     }

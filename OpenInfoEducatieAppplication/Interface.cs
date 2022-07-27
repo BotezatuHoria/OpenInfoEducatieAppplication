@@ -18,9 +18,11 @@ namespace OpenInfoEducatieAppplication
 
         private int lastPosX = 0, lastPosY = 0;
         List<int> list = new List<int>();
+        int id;
 
-        public Interface()
+        public Interface(int _id)
         {
+            id = _id;
             InitializeComponent();
         }
 
@@ -120,10 +122,8 @@ namespace OpenInfoEducatieAppplication
                 MessageBox.Show("There are only 24 hours in a day.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ok = true;
             }
-            if (ok == true)
+            if (ok == false)
                 ActualCalc();
-            for (int i = 0; i < list.Count; ++i)
-                Console.WriteLine(list[i]);
         }
 
         private void ActualCalc()
@@ -159,10 +159,16 @@ namespace OpenInfoEducatieAppplication
                 }
                     
             }
+            SendData(sleep, ent, hmw, grass);
 
         }
-        private void SendData()
+        private void SendData(int sleep, int ent, int work, int outside)
         {
+            int sleepTime = sleep;
+            int entertainmentTime = ent;
+            int workTime = work;
+            int outsideTime = outside;
+
             var url = "https://api.open-infoed.cristimacovei.dev/add-tracker-data";
             var req = (HttpWebRequest)WebRequest.Create(url);
 
@@ -170,16 +176,27 @@ namespace OpenInfoEducatieAppplication
             req.Accept = "application/json";
             req.ContentType = "application/json";
 
-            /*var data = @"{
-                'userId': 
-                day: string
-                data: {
-                sleep: integer
-                entertainment: integer
-                work: integer
-                outside: integer
-                }
-            }"*/
+            string day = DateTime.Today.ToString();
+
+            string json = "{\"userId\": " + id.ToString() + ", \"day\": \"" + day + "\", \"data\": {\"sleep\": " + sleepTime.ToString() + ", \"entertainment\": " + entertainmentTime.ToString() + ", \"work\": " + workTime.ToString() + ", \"outside\": " + outsideTime.ToString() + "}}";
+            
+            Console.WriteLine(json);
+
+            using (var streamWriter = new StreamWriter(req.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+
+            }
+
+            var result = "nu";
+            var res = (HttpWebResponse)req.GetResponse();
+            using (var streamReader = new StreamReader(res.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+
+            Console.WriteLine(result);
+
         }
     }
 }

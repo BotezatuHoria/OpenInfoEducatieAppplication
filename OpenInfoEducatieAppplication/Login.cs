@@ -54,15 +54,15 @@ namespace OpenInfoEducatieAppplication
             }
 
             Console.WriteLine(result);
-
+            
             UserRequest fin = JsonConvert.DeserializeObject<UserRequest>(result);
             //var final = JsonConvert.DeserializeObject(result); 
-            Console.WriteLine(fin.Status);
+            Console.WriteLine(fin.data.id);
             Console.WriteLine(res.StatusCode);
 
-            
+            int id = fin.data.id;
 
-            //new Interface().ShowDialog();
+            new Interface(id).ShowDialog();
 
         }
     }

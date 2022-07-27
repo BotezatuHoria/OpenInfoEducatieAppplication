@@ -54,7 +54,7 @@ namespace OpenInfoEducatieAppplication
             set { _lName = value; }
         }
 
-        public string password
+        public string hashedPassword
         {
             get { return _password; }
             set { _password = value; }

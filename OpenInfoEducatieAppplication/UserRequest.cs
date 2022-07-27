@@ -28,7 +28,7 @@ namespace OpenInfoEducatieAppplication
             set { _status = value; }
         }
 
-        public User usr
+        public User data
         {
             get { return _user; }
             set { _user = value; }

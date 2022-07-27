@@ -38,12 +38,17 @@ namespace OpenInfoEducatieAppplication
             this.logOutButton = new System.Windows.Forms.Button();
             this.trackButton = new System.Windows.Forms.Button();
             this.appPanel = new System.Windows.Forms.Panel();
+            this.articleButton = new System.Windows.Forms.Button();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.verifButton = new System.Windows.Forms.Button();
             this.controlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
+            this.appPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // controlPanel
             // 
+            this.controlPanel.Controls.Add(this.articleButton);
             this.controlPanel.Controls.Add(this.trackButton);
             this.controlPanel.Controls.Add(this.logOutButton);
             this.controlPanel.Controls.Add(this.pomoButton);
@@ -72,24 +77,26 @@ namespace OpenInfoEducatieAppplication
             // 
             // userButton
             // 
-            this.userButton.Location = new System.Drawing.Point(37, 13);
+            this.userButton.Location = new System.Drawing.Point(37, 3);
             this.userButton.Name = "userButton";
             this.userButton.Size = new System.Drawing.Size(75, 76);
             this.userButton.TabIndex = 0;
             this.userButton.UseVisualStyleBackColor = true;
+            this.userButton.Click += new System.EventHandler(this.userButton_Click);
             // 
             // quizButton
             // 
-            this.quizButton.Location = new System.Drawing.Point(37, 131);
+            this.quizButton.Location = new System.Drawing.Point(37, 107);
             this.quizButton.Name = "quizButton";
             this.quizButton.Size = new System.Drawing.Size(75, 76);
             this.quizButton.TabIndex = 1;
             this.quizButton.Text = "button2";
             this.quizButton.UseVisualStyleBackColor = true;
+            this.quizButton.Click += new System.EventHandler(this.quizButton_Click);
             // 
             // pomoButton
             // 
-            this.pomoButton.Location = new System.Drawing.Point(37, 256);
+            this.pomoButton.Location = new System.Drawing.Point(37, 313);
             this.pomoButton.Name = "pomoButton";
             this.pomoButton.Size = new System.Drawing.Size(75, 76);
             this.pomoButton.TabIndex = 2;
@@ -108,7 +115,7 @@ namespace OpenInfoEducatieAppplication
             // 
             // trackButton
             // 
-            this.trackButton.Location = new System.Drawing.Point(37, 391);
+            this.trackButton.Location = new System.Drawing.Point(37, 420);
             this.trackButton.Name = "trackButton";
             this.trackButton.Size = new System.Drawing.Size(75, 76);
             this.trackButton.TabIndex = 4;
@@ -118,16 +125,47 @@ namespace OpenInfoEducatieAppplication
             // 
             // appPanel
             // 
+            this.appPanel.Controls.Add(this.flowLayoutPanel);
             this.appPanel.Location = new System.Drawing.Point(170, 89);
             this.appPanel.Name = "appPanel";
             this.appPanel.Size = new System.Drawing.Size(911, 533);
             this.appPanel.TabIndex = 4;
             // 
+            // articleButton
+            // 
+            this.articleButton.Location = new System.Drawing.Point(37, 204);
+            this.articleButton.Name = "articleButton";
+            this.articleButton.Size = new System.Drawing.Size(75, 76);
+            this.articleButton.TabIndex = 5;
+            this.articleButton.Text = "button3";
+            this.articleButton.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel
+            // 
+            this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(905, 527);
+            this.flowLayoutPanel.TabIndex = 0;
+            // 
+            // verifButton
+            // 
+            this.verifButton.Enabled = false;
+            this.verifButton.Location = new System.Drawing.Point(928, 638);
+            this.verifButton.Name = "verifButton";
+            this.verifButton.Size = new System.Drawing.Size(75, 23);
+            this.verifButton.TabIndex = 5;
+            this.verifButton.Text = "button1";
+            this.verifButton.UseVisualStyleBackColor = true;
+            this.verifButton.Visible = false;
+            this.verifButton.Click += new System.EventHandler(this.NextClick);
+            // 
             // Interface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1093, 634);
+            this.ClientSize = new System.Drawing.Size(1128, 673);
+            this.Controls.Add(this.verifButton);
             this.Controls.Add(this.appPanel);
             this.Controls.Add(this.logoPicture);
             this.Controls.Add(this.nameLabel);
@@ -136,6 +174,7 @@ namespace OpenInfoEducatieAppplication
             this.Text = "Interface";
             this.controlPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).EndInit();
+            this.appPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -151,5 +190,8 @@ namespace OpenInfoEducatieAppplication
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.PictureBox logoPicture;
         private System.Windows.Forms.Panel appPanel;
+        private System.Windows.Forms.Button articleButton;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
+        private System.Windows.Forms.Button verifButton;
     }
 }

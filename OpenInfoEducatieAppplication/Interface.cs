@@ -17,8 +17,11 @@ namespace OpenInfoEducatieAppplication
     {
 
         private int lastPosX = 0, lastPosY = 0;
+        int pace = 0;
         List<int> list = new List<int>();
         int id;
+        private int panX = 0, panY = 0;
+        Quiz quiz = new Quiz();
 
         public Interface(int _id)
         {
@@ -34,6 +37,8 @@ namespace OpenInfoEducatieAppplication
 
         private void trackButton_Click(object sender, EventArgs e)
         {
+            EraseContent();
+
             Label question = new Label();
             question.Text = "How many hours did you spend:";
             question.AutoSize = false;
@@ -162,6 +167,7 @@ namespace OpenInfoEducatieAppplication
             SendData(sleep, ent, hmw, grass);
 
         }
+
         private void SendData(int sleep, int ent, int work, int outside)
         {
             int sleepTime = sleep;
@@ -198,5 +204,132 @@ namespace OpenInfoEducatieAppplication
             Console.WriteLine(result);
 
         }
+
+        public void EraseContent()
+        {
+            appPanel.Controls.Clear();
+            flowLayoutPanel.Controls.Clear();
+        }
+
+        private void userButton_Click(object sender, EventArgs e)
+        {
+            GenPanel();
+        }
+
+        private void quizButton_Click(object sender, EventArgs e)
+        {
+            EraseContent();
+            flowLayoutPanel.Visible = true;
+            flowLayoutPanel.Enabled = true;
+            pace = 0;
+            //new Test().ShowDialog();
+            appPanel.Controls.Add(flowLayoutPanel);
+            flowLayoutPanel.BringToFront();
+
+            GenPanel();
+
+        }
+
+        public void GenPanel()
+        {
+            Panel panel = new Panel();
+            panel.Width = 250;
+            panel.Height = 250;
+            panel.BackColor = Color.Navy;
+            panel.Location = new Point(panX, panY);
+            panX = panel.Location.X;
+            panY = panel.Location.Y;
+
+            Button button = new Button();
+            button.Location = new Point(panX + 40, panY + 175);
+            button.Width = 175;
+            button.Height = 50;
+            button.Click += StartQuiz;
+
+            Label label = new Label();
+            label.AutoSize = false;
+            label.Text = "CAINELEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE";
+            label.ForeColor = Color.White;
+            label.Location = new Point(panX + 50, panY + 50);
+            label.Width = 175;
+            label.Height = 50;
+            //label.TextAlign
+            label.TextAlign = ContentAlignment.TopLeft;
+
+
+            panel.Controls.Add(button);
+            panel.Controls.Add(label);
+            //appPanel.Controls.Add(panel);
+            flowLayoutPanel.Controls.Add(panel);
+        }
+
+        public void StartQuiz(object sender, EventArgs e)
+        {
+            flowLayoutPanel.Enabled = false;
+            flowLayoutPanel.Visible = false;
+            verifButton.Enabled = true;
+            verifButton.Visible = true;
+
+            var url = "https://api.open-infoed.cristimacovei.dev/questions";
+            var req = (HttpWebRequest)WebRequest.Create(url);
+
+            req.Method = "GET";
+            req.Accept = "application/json";
+            req.ContentType = "application/json";
+
+            var result = "nu";
+            var res = (HttpWebResponse)req.GetResponse();
+            using (var streamReader = new StreamReader(res.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+
+            
+            Console.WriteLine(result);
+            quiz = JsonConvert.DeserializeObject<Quiz>(result);
+            Console.WriteLine(quiz.data[0].question.prompt + quiz.data[0].answers[0].prompt);
+            Button button = new Button();
+            GenQuiz(0);
+        }
+
+        public void GenQuiz(int i)
+        {
+            Label label = new Label();
+            label.Text = quiz.data[i].question.prompt;
+            label.ForeColor = Color.Black;
+            appPanel.Controls.Add(label);
+
+            int dist = 25;
+            int pX = label.Location.X;
+            int pY = label.Location.Y;
+            foreach(Answer answer in quiz.data[i].answers)
+            {
+                RadioButton radioButton = new RadioButton();
+                radioButton.Text = answer.prompt;
+                radioButton.Location = new Point(pX, pY + dist);
+                radioButton.AutoSize = false;
+                radioButton.Width = 450;
+                pY += dist;
+                appPanel.Controls.Add(radioButton);
+            }
+        }
+
+        public void NextClick(object sender, EventArgs e)
+        {
+            EraseContent();
+            if (pace < quiz.data.Count - 1)
+            {
+                pace++;
+                GenQuiz(pace);
+            }
+            else
+            {
+                quizButton_Click(sender, e);
+                verifButton.Enabled = false;
+                verifButton.Visible = false;
+            }
+            
+        }
+
     }
 }

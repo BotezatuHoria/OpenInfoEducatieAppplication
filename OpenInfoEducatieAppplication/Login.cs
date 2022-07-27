@@ -29,9 +29,12 @@ namespace OpenInfoEducatieAppplication
             req.Method = "POST";
             req.Accept = "application/json";
             req.ContentType = "application/json";
-            
-            string email = emailTextBox.Text.Trim();
-            string password = passwordTextBox.Text.Trim();
+
+            //string email = emailTextBox.Text.Trim();
+            //string password = passwordTextBox.Text.Trim();
+
+            string email = "mirel28";
+            string password = "cefacecainele";
 
             LoginData loginData = new LoginData(email, password);
 

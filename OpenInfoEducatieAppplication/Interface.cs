@@ -24,6 +24,7 @@ namespace OpenInfoEducatieAppplication
         private int panX = 0, panY = 0;
         Quiz quiz = new Quiz();
         private string currentFile = null;
+        int score = 0;
 
         int targetTime = 1 * 5 * 1000;
         int elapsedTime = 0;
@@ -87,7 +88,7 @@ namespace OpenInfoEducatieAppplication
 
             appPanel.Controls.Add(buttonSend);
             appPanel.Controls.Add(result);
-
+            
         }
 
         public void GenerateNewStat(string name, int dist)
@@ -162,6 +163,10 @@ namespace OpenInfoEducatieAppplication
                 }
                     
             }
+            if (list.Count != 4)
+            {
+                return;
+            }
             int ent = list[0];
             int grass = list[1];
             int sleep = list[2];
@@ -185,7 +190,7 @@ namespace OpenInfoEducatieAppplication
                     
             }
             SendData(sleep, ent, hmw, grass);
-
+            list.Clear();
         }
 
         private void SendData(int sleep, int ent, int work, int outside)
@@ -222,6 +227,12 @@ namespace OpenInfoEducatieAppplication
             }
 
             Console.WriteLine(result);
+
+            foreach (Control control in appPanel.Controls)
+            {
+                if (control is Button)
+                    control.Enabled = false;
+            }
 
         }
 
@@ -378,9 +389,7 @@ namespace OpenInfoEducatieAppplication
         public void NextClick(object sender, EventArgs e)
         {
             if (ValidateAnswer() == true)
-                Console.WriteLine("nu mere");
-            else
-                Console.WriteLine("mere");
+                score++;
             EraseContent();
             if (pace < quiz.data.Count - 1)
             {
@@ -389,6 +398,8 @@ namespace OpenInfoEducatieAppplication
             }
             else
             {
+                MessageBox.Show("Your score was " + score.ToString() + ".", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                score = 0;
                 quizButton_Click(sender, e);
                 verifButton.Enabled = false;
                 verifButton.Visible = false;

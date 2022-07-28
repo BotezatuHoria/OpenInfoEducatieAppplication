@@ -22,6 +22,13 @@ namespace OpenInfoEducatieAppplication
         int id;
         private int panX = 0, panY = 0;
         Quiz quiz = new Quiz();
+        private string currentFile = null;
+
+        int targetTime = 5 * 60 * 1000;
+        int elapsedTime = 0;
+
+        System.Windows.Forms.Timer clock = new System.Windows.Forms.Timer();
+        Label pomoLabel = new Label();
 
         public Interface(int _id)
         {
@@ -213,7 +220,7 @@ namespace OpenInfoEducatieAppplication
 
         private void userButton_Click(object sender, EventArgs e)
         {
-            GenPanel();
+            GenPanel("Test", "Quiz");
         }
 
         private void quizButton_Click(object sender, EventArgs e)
@@ -226,11 +233,11 @@ namespace OpenInfoEducatieAppplication
             appPanel.Controls.Add(flowLayoutPanel);
             flowLayoutPanel.BringToFront();
 
-            GenPanel();
+            GenPanel("Quiz1", "Quiz");
 
         }
 
-        public void GenPanel()
+        public void GenPanel(string name, string tg)
         {
             Panel panel = new Panel();
             panel.Width = 250;
@@ -244,11 +251,17 @@ namespace OpenInfoEducatieAppplication
             button.Location = new Point(panX + 40, panY + 175);
             button.Width = 175;
             button.Height = 50;
-            button.Click += StartQuiz;
-
+            if (tg == "Quiz")
+                button.Click += StartQuiz;
+            else
+            {
+                button.Click += StartPdfView;
+                button.Tag = tg;
+            }
+                
             Label label = new Label();
             label.AutoSize = false;
-            label.Text = "CAINELEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE";
+            label.Text = name;
             label.ForeColor = Color.White;
             label.Location = new Point(panX + 50, panY + 50);
             label.Width = 175;
@@ -308,14 +321,29 @@ namespace OpenInfoEducatieAppplication
                 radioButton.Text = answer.prompt;
                 radioButton.Location = new Point(pX, pY + dist);
                 radioButton.AutoSize = false;
+                radioButton.Tag = answer.isCorrect;
                 radioButton.Width = 450;
                 pY += dist;
                 appPanel.Controls.Add(radioButton);
             }
         }
 
+        private void articleButton_Click(object sender, EventArgs e)
+        {
+            List<string> list = new List<string>() { "https://lumenpublishing.com/journals/index.php/po/article/download/2277/pdf/6101", "https://sync.ithra.com/reports/SYNC_Global_digital_well-being_report_EN.pdf" };
+            foreach (string article in list)
+            {
+                GenPanel("Article", article);
+            }
+
+        }
+
         public void NextClick(object sender, EventArgs e)
         {
+            if (ValidateAnswer() == true)
+                Console.WriteLine("nu mere");
+            else
+                Console.WriteLine("mere");
             EraseContent();
             if (pace < quiz.data.Count - 1)
             {
@@ -329,6 +357,58 @@ namespace OpenInfoEducatieAppplication
                 verifButton.Visible = false;
             }
             
+        }
+
+        private void pomoButton_Click(object sender, EventArgs e)
+        {
+            EraseContent();
+            Button startButton = new Button();
+            startButton.Location = new Point(150, 350);
+            startButton.BackColor = Color.Red;
+            startButton.Click += StartTime;
+            appPanel.Controls.Add(pomoLabel);
+            appPanel.Controls.Add(startButton);
+
+        }
+
+        public bool ValidateAnswer()
+        {
+            foreach (Control i in appPanel.Controls)
+            {
+                if (i is RadioButton)
+                {
+                    var box = (RadioButton)i;
+                    if (Convert.ToBoolean(box.Checked) == Convert.ToBoolean(box.Tag) && Convert.ToBoolean(box.Tag) == true)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        public void StartPdfView(object sender, EventArgs e)
+        {
+            currentFile = ((Button)sender).Tag.ToString();
+            Console.WriteLine(currentFile);
+            
+            new PDF(currentFile).ShowDialog();
+        }
+
+        private void StartTime(object sender, EventArgs e)
+        {
+            clock.Tick += new EventHandler(TimerEventProcessor);
+
+            clock.Interval = 1000;
+            clock.Start();
+        }
+
+        public void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
+        {
+            int minutes = (targetTime - elapsedTime) / 1000 / 60;
+            int seconds = ((targetTime - elapsedTime) / 1000) % 60;
+
+            pomoLabel.Text = minutes.ToString() + " : " + seconds.ToString();
+
+            elapsedTime += 1000;
         }
 
     }

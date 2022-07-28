@@ -102,6 +102,7 @@ namespace OpenInfoEducatieAppplication
             this.pomoButton.TabIndex = 2;
             this.pomoButton.Text = "button3";
             this.pomoButton.UseVisualStyleBackColor = true;
+            this.pomoButton.Click += new System.EventHandler(this.pomoButton_Click);
             // 
             // logOutButton
             // 
@@ -139,6 +140,7 @@ namespace OpenInfoEducatieAppplication
             this.articleButton.TabIndex = 5;
             this.articleButton.Text = "button3";
             this.articleButton.UseVisualStyleBackColor = true;
+            this.articleButton.Click += new System.EventHandler(this.articleButton_Click);
             // 
             // flowLayoutPanel
             // 

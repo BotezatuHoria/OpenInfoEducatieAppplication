@@ -10,14 +10,13 @@ using System.Windows.Forms;
 
 namespace OpenInfoEducatieAppplication
 {
-    public partial class Test : Form
+    public partial class PDF : Form
     {
-        public Test()
+        public PDF(string _file)
         {
             InitializeComponent();
-
-            string fileName = "https://cmvro.ro/files/download/legislatie/legislatie-caini/ordonanta-55.pdf";
-            axAcroPDF1.src = fileName;
+            string fileName = "https://lumenpublishing.com/journals/index.php/po/article/download/2277/pdf/6101";
+            axAcroPDF1.src = _file;
         }
     }
 }

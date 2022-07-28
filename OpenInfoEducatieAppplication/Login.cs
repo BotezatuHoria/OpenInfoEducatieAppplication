@@ -46,7 +46,6 @@ namespace OpenInfoEducatieAppplication
             using (var streamWriter = new StreamWriter(req.GetRequestStream()))
             {
                 streamWriter.Write(data);
-               
             }
             
             var result = "nu";
@@ -68,5 +67,8 @@ namespace OpenInfoEducatieAppplication
             new Interface(id).ShowDialog();
 
         }
+
+
+
     }
 }

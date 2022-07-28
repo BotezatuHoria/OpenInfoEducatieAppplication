@@ -1,7 +1,7 @@
 ﻿
 namespace OpenInfoEducatieAppplication
 {
-    partial class Test
+    partial class PDF
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace OpenInfoEducatieAppplication
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Test));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PDF));
             this.button1 = new System.Windows.Forms.Button();
             this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
             ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();

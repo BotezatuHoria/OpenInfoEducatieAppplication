@@ -156,5 +156,38 @@
   <ItemGroup>
     <None Include="Resources\try.svg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x-nobg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tommy2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-powerpoint-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-powerpoint-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-pie-chart-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-clock-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-query-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-open-door-96.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

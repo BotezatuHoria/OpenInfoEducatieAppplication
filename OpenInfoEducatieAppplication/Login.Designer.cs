@@ -35,8 +35,8 @@ namespace OpenInfoEducatieAppplication
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.emailLabel = new System.Windows.Forms.Label();
             this.passLabel = new System.Windows.Forms.Label();
-            this.logoPic = new System.Windows.Forms.PictureBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.logoPic = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,6 +68,7 @@ namespace OpenInfoEducatieAppplication
             this.passwordTextBox.Location = new System.Drawing.Point(137, 252);
             this.passwordTextBox.Multiline = true;
             this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(231, 43);
             this.passwordTextBox.TabIndex = 2;
             // 
@@ -91,16 +92,6 @@ namespace OpenInfoEducatieAppplication
             this.passLabel.TabIndex = 4;
             this.passLabel.Text = "Password:";
             // 
-            // logoPic
-            // 
-            this.logoPic.Image = global::OpenInfoEducatieAppplication.Properties.Resources.logo;
-            this.logoPic.Location = new System.Drawing.Point(137, 12);
-            this.logoPic.Name = "logoPic";
-            this.logoPic.Size = new System.Drawing.Size(223, 108);
-            this.logoPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.logoPic.TabIndex = 5;
-            this.logoPic.TabStop = false;
-            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -112,6 +103,16 @@ namespace OpenInfoEducatieAppplication
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Register";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // logoPic
+            // 
+            this.logoPic.Image = global::OpenInfoEducatieAppplication.Properties.Resources.logo;
+            this.logoPic.Location = new System.Drawing.Point(137, 12);
+            this.logoPic.Name = "logoPic";
+            this.logoPic.Size = new System.Drawing.Size(223, 108);
+            this.logoPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.logoPic.TabIndex = 5;
+            this.logoPic.TabStop = false;
             // 
             // Login
             // 

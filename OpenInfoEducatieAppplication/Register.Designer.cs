@@ -74,6 +74,7 @@ namespace OpenInfoEducatieAppplication
             this.passwordTextBox.Location = new System.Drawing.Point(92, 337);
             this.passwordTextBox.Multiline = true;
             this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(383, 36);
             this.passwordTextBox.TabIndex = 3;
             // 
@@ -82,7 +83,7 @@ namespace OpenInfoEducatieAppplication
             this.sendButton.BackColor = System.Drawing.Color.LightGray;
             this.sendButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.sendButton.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.sendButton.Location = new System.Drawing.Point(123, 397);
+            this.sendButton.Location = new System.Drawing.Point(126, 400);
             this.sendButton.Name = "sendButton";
             this.sendButton.Size = new System.Drawing.Size(329, 59);
             this.sendButton.TabIndex = 4;

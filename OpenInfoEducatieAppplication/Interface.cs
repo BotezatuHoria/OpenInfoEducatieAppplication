@@ -25,7 +25,7 @@ namespace OpenInfoEducatieAppplication
         Quiz quiz = new Quiz();
         private string currentFile = null;
 
-        int targetTime = 25 * 60 * 1000;
+        int targetTime = 1 * 5 * 1000;
         int elapsedTime = 0;
 
         System.Windows.Forms.Timer clock = new System.Windows.Forms.Timer();
@@ -51,11 +51,13 @@ namespace OpenInfoEducatieAppplication
             nameLabel.Visible = false;
             nameLabel.Enabled = false;
             Label question = new Label();
+            question.Font = new Font("Times New Roman", 30);
             question.Text = "How many hours did you spend:";
             question.AutoSize = false;
             question.Width = 1000;
             question.Height = 100;
-            question.BackColor = Color.Blue;
+            //question.Location = new Point(appPanel.Location.X + 10, appPanel.Location.Y);
+            //question.BackColor = Color.Blue;
 
             lastPosX = question.Location.X;
             lastPosY = question.Location.Y;
@@ -63,20 +65,25 @@ namespace OpenInfoEducatieAppplication
             appPanel.Controls.Add(question);
             GenerateNewStat("Entertainment", 150);
             GenerateNewStat("Outside:", 75);
-            GenerateNewStat("Sleep", 75);
-            GenerateNewStat("Homework", 75);
+            GenerateNewStat("Sleep:", 75);
+            GenerateNewStat("Homework:", 75);
 
             Button buttonSend = new Button();
-            buttonSend.Location = new Point(lastPosX + 500, lastPosY);
+            buttonSend.Location = new Point(lastPosX + 450, lastPosY);
+            buttonSend.Font = new Font("Times New Roman", 25);
             buttonSend.Click += LazyCalculator;
-            buttonSend.Text = "apasa";
+            buttonSend.Text = "Track your data";
+            buttonSend.Height = 50;
+            buttonSend.Width = 400;
 
             Label result = new Label();
-            result.Location = new Point(lastPosX + 400, lastPosY - 200);
+            result.Font = new Font("Times New Roman", 25);
+            result.Location = new Point(lastPosX + 450, lastPosY - 200);
             result.AutoSize = false;
-            result.BackColor = Color.Green;
+            //result.BackColor = Color.Green;
             result.Text = "";
-
+            result.Width = 400;
+            result.Height = 200;
 
             appPanel.Controls.Add(buttonSend);
             appPanel.Controls.Add(result);
@@ -86,16 +93,18 @@ namespace OpenInfoEducatieAppplication
         public void GenerateNewStat(string name, int dist)
         {
             Label label = new Label();
+            label.Font = new Font("Times New Roman", 25);
             label.Text = name;
             label.AutoSize = false;
             label.Location = new Point(lastPosX, lastPosY + dist);
-            label.Width = 200;
+            label.Width = 205;
             label.Height = 50;
-            label.BackColor = Color.Red;
+            //label.BackColor = Color.Red;
             lastPosX = label.Location.X;
             lastPosY = label.Location.Y;
 
             TextBox textBox = new TextBox();
+            textBox.Font = new Font("Times New Roman", 25);
             textBox.Location = new Point(label.Location.X + 210, label.Location.Y);
             textBox.Height = 50;
             textBox.Multiline = true;
@@ -249,7 +258,7 @@ namespace OpenInfoEducatieAppplication
             Panel panel = new Panel();
             panel.Width = 250;
             panel.Height = 250;
-            panel.BackColor = Color.Navy;
+            panel.BackColor = Color.Salmon;
             panel.Location = new Point(panX, panY);
             panX = panel.Location.X;
             panY = panel.Location.Y;
@@ -258,6 +267,10 @@ namespace OpenInfoEducatieAppplication
             button.Location = new Point(panX + 40, panY + 175);
             button.Width = 175;
             button.Height = 50;
+            button.Font = new Font("Times New Roman", 18);
+            button.BackColor = Color.LightGray;
+            button.FlatStyle = FlatStyle.System;
+            button.Text = "Press";
             if (tg == "Quiz")
                 button.Click += StartQuiz;
             else
@@ -270,9 +283,10 @@ namespace OpenInfoEducatieAppplication
             label.AutoSize = false;
             label.Text = name;
             label.ForeColor = Color.White;
-            label.Location = new Point(panX + 50, panY + 50);
+            label.Location = new Point(panX + 75, panY + 50);
             label.Width = 175;
             label.Height = 50;
+            label.Font = new Font("Times New Roman", 25);
             //label.TextAlign
             label.TextAlign = ContentAlignment.TopLeft;
 
@@ -317,9 +331,12 @@ namespace OpenInfoEducatieAppplication
             Label label = new Label();
             label.Text = quiz.data[i].question.prompt;
             label.ForeColor = Color.Black;
+            label.Font = new Font("Times New Roman", 35);
+            label.Height = 50;
+            label.Width = 1000;
             appPanel.Controls.Add(label);
 
-            int dist = 25;
+            int dist = 100;
             int pX = label.Location.X;
             int pY = label.Location.Y;
             foreach(Answer answer in quiz.data[i].answers)
@@ -329,7 +346,9 @@ namespace OpenInfoEducatieAppplication
                 radioButton.Location = new Point(pX, pY + dist);
                 radioButton.AutoSize = false;
                 radioButton.Tag = answer.isCorrect;
-                radioButton.Width = 450;
+                radioButton.Width = 1000;
+                radioButton.Height = 50;
+                radioButton.Font = new Font("Times New Roman", 25);
                 pY += dist;
                 appPanel.Controls.Add(radioButton);
             }
@@ -383,12 +402,28 @@ namespace OpenInfoEducatieAppplication
             nameLabel.Visible = false;
             nameLabel.Enabled = false;
             Button startButton = new Button();
-            startButton.Location = new Point(150, 350);
-            startButton.BackColor = Color.Red;
+            startButton.Location = new Point(315, 450);
+            startButton.Font = new Font("Times New Roman", 35);
+            startButton.BackColor = Color.Salmon;
+            startButton.Text = "Start timer";
             startButton.Click += StartTime;
+            startButton.Width = 300;
+            startButton.Height = 75;
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Image = OpenInfoEducatieAppplication.Properties.Resources.tommy2;
+            pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox.Location = new Point(appPanel.Location.X + 10, pictureBox.Location.Y);
+
+            pomoLabel.Location = new Point(400, 250);
+            pomoLabel.Font = new Font("Times New Roman", 35);
+            pomoLabel.Width = 350;
+            pomoLabel.Height = 100;
+            pomoLabel.BackColor = Color.Transparent;
+            pomoLabel.AutoSize = true;
+
             appPanel.Controls.Add(pomoLabel);
             appPanel.Controls.Add(startButton);
-
+            appPanel.Controls.Add(pictureBox);
         }
 
         public bool ValidateAnswer()

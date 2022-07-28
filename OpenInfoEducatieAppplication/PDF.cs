@@ -15,7 +15,7 @@ namespace OpenInfoEducatieAppplication
         public PDF(string _file)
         {
             InitializeComponent();
-            string fileName = "https://lumenpublishing.com/journals/index.php/po/article/download/2277/pdf/6101";
+            //string fileName = "https://lumenpublishing.com/journals/index.php/po/article/download/2277/pdf/6101";
             axAcroPDF1.src = _file;
         }
     }

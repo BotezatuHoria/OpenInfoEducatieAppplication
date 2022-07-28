@@ -15,10 +15,13 @@ namespace OpenInfoEducatieAppplication
 {
     public partial class Login : Form
     {
-        
+
         public Login()
         {
+            //logoPic.Image = OpenInfoEducatieAppplication.Properties.Resources.logo;
             InitializeComponent();
+            emailTextBox.Text = "";
+            passwordTextBox.Text = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,12 +33,18 @@ namespace OpenInfoEducatieAppplication
             req.Accept = "application/json";
             req.ContentType = "application/json";
 
-            //string email = emailTextBox.Text.Trim();
-            //string password = passwordTextBox.Text.Trim();
+            string email = emailTextBox.Text.Trim();
+            string password = passwordTextBox.Text.Trim();
 
-            string email = "mirel28";
-            string password = "cefacecainele";
-
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Email and password can not be empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+                
+            //string email = "mirel28";
+            //string password = "cefacecainele";
+            
             LoginData loginData = new LoginData(email, password);
 
             string data = JsonConvert.SerializeObject(loginData);
@@ -59,16 +68,30 @@ namespace OpenInfoEducatieAppplication
             
             UserRequest fin = JsonConvert.DeserializeObject<UserRequest>(result);
             //var final = JsonConvert.DeserializeObject(result); 
-            Console.WriteLine(fin.data.id);
-            Console.WriteLine(res.StatusCode);
+            if (fin.data != null)
+            {
+                Console.WriteLine(fin.data.id);
+                Console.WriteLine(res.StatusCode);
 
-            int id = fin.data.id;
+                int id = fin.data.id;
+                string name = fin.data.firstName;
 
-            new Interface(id).ShowDialog();
+                new Interface(id, name).ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("User or password is wrong, please try again!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            emailTextBox.Text = "";
+            passwordTextBox.Text = "";
 
         }
 
-
-
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            emailTextBox.Text = "";
+            passwordTextBox.Text = "";
+            new Register().ShowDialog();
+        }
     }
 }

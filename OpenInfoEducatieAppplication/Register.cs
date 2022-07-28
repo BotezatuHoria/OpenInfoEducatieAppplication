@@ -34,7 +34,7 @@ namespace OpenInfoEducatieAppplication
             string lname = lNameTextBox.Text.Trim();
             string password = passwordTextBox.Text.Trim();
 
-            User user = new User(email, fname, lname, password);
+            UserRegister user = new UserRegister(email, fname, lname, password);
 
             string data = JsonConvert.SerializeObject(user);
 

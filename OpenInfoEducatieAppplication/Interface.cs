@@ -20,32 +20,36 @@ namespace OpenInfoEducatieAppplication
         int pace = 0;
         List<int> list = new List<int>();
         int id;
+        string name;
         private int panX = 0, panY = 0;
         Quiz quiz = new Quiz();
         private string currentFile = null;
 
-        int targetTime = 5 * 60 * 1000;
+        int targetTime = 25 * 60 * 1000;
         int elapsedTime = 0;
 
         System.Windows.Forms.Timer clock = new System.Windows.Forms.Timer();
         Label pomoLabel = new Label();
 
-        public Interface(int _id)
+        public Interface(int _id, string _name)
         {
             id = _id;
+            name = _name;
             InitializeComponent();
+            nameLabel.Text = "Hello, " + name + "!";
         }
 
         private void logOutButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            new Login().ShowDialog();
+            //new Login().ShowDialog();
         }
 
         private void trackButton_Click(object sender, EventArgs e)
         {
             EraseContent();
-
+            nameLabel.Visible = false;
+            nameLabel.Enabled = false;
             Label question = new Label();
             question.Text = "How many hours did you spend:";
             question.AutoSize = false;
@@ -220,11 +224,14 @@ namespace OpenInfoEducatieAppplication
 
         private void userButton_Click(object sender, EventArgs e)
         {
-            GenPanel("Test", "Quiz");
+            //Notification notification = new Notification();
+            //notification.ShowAlert("Test");
         }
 
         private void quizButton_Click(object sender, EventArgs e)
         {
+            nameLabel.Visible = false;
+            nameLabel.Enabled = false;
             EraseContent();
             flowLayoutPanel.Visible = true;
             flowLayoutPanel.Enabled = true;
@@ -330,6 +337,17 @@ namespace OpenInfoEducatieAppplication
 
         private void articleButton_Click(object sender, EventArgs e)
         {
+            //flowLayoutPanel.Controls.Clear();
+            //appPanel.Controls.Clear();
+            //Console.WriteLine("SSSSS");
+            nameLabel.Visible = false;
+            nameLabel.Enabled = false;
+            EraseContent();
+            flowLayoutPanel.Visible = true;
+            flowLayoutPanel.Enabled = true;
+            flowLayoutPanel.BringToFront();
+            appPanel.Controls.Add(flowLayoutPanel);
+            flowLayoutPanel.BringToFront();
             List<string> list = new List<string>() { "https://lumenpublishing.com/journals/index.php/po/article/download/2277/pdf/6101", "https://sync.ithra.com/reports/SYNC_Global_digital_well-being_report_EN.pdf" };
             foreach (string article in list)
             {
@@ -362,6 +380,8 @@ namespace OpenInfoEducatieAppplication
         private void pomoButton_Click(object sender, EventArgs e)
         {
             EraseContent();
+            nameLabel.Visible = false;
+            nameLabel.Enabled = false;
             Button startButton = new Button();
             startButton.Location = new Point(150, 350);
             startButton.BackColor = Color.Red;
@@ -409,6 +429,27 @@ namespace OpenInfoEducatieAppplication
             pomoLabel.Text = minutes.ToString() + " : " + seconds.ToString();
 
             elapsedTime += 1000;
+
+            if (targetTime < elapsedTime + 1000)
+            {
+                Console.WriteLine("cainele");
+
+                Notification notification = new Notification();
+                notification.ShowAlert(targetTime == 5 * 60 * 1000 ? "Get back to work!" : "Take a break!");
+                
+            }
+
+            if (targetTime < elapsedTime) { 
+                elapsedTime = 0;
+
+                targetTime = 60 * 1000 * (targetTime == 5 * 60 * 1000 ? 25 : 5);
+            }
+               
+        }
+
+        private void GetData()
+        {
+            //TODO Implement this feature
         }
 
     }
